@@ -1,24 +1,15 @@
-# README
+# EsaFeeder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 開発環境のセットアップ
 
-Things you may want to cover:
+.env.sampleをコピーして.envを作成します
+```sh
+cp .env.sample .env
+```
 
-* Ruby version
+TOKENを設定します
+```
+ESA_OWNER_API_TOKEN=YOUR_TOKEN
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+TOKENの発行はここから:https://[team].esa.io/user/applications
