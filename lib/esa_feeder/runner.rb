@@ -27,7 +27,12 @@ module EsaFeeder
     end
 
     def notify_slack(title, url)
-      notifier.post text: "#{title}を作成しました / #{url}"
+      notifier.post attachments: [{
+        pretext: '新しい記事を作成しました',
+        title: title,
+        title_link: url,
+        color: 'good'
+      }]
     end
   end
 end
