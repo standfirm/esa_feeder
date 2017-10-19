@@ -8,3 +8,4 @@ gemspec
 gem 'dotenv'
 gem 'esa'
 gem 'pry'
+gem 'thor'
