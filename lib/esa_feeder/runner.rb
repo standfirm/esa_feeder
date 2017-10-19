@@ -14,6 +14,7 @@ module EsaFeeder
       client.posts(q: query(time)).body['posts'].map do |post|
         r = client.create_post(template_post_id: post['number'], user: user)
         notify_slack(r.body['full_name'], r.body['url']) if notifier
+        { post['number'] => r.body['number'] }
       end
     end
 
