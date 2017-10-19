@@ -1,5 +1,2 @@
-require "esa_feeder/version"
-
-module EsaFeeder
-  # Your code goes here...
-end
+require 'esa_feeder/version'
+require 'esa_feeder/runner'
