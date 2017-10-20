@@ -7,7 +7,7 @@ class Templates < Thor
     logger = Logger.new(STDOUT)
     logger.info('feed task start')
     begin
-      logger.info(EsaFeeder::Runner.new.run)
+      logger.info(EsaFeeder.feed)
     rescue => e
       logger.error(e)
     end

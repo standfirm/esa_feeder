@@ -1,3 +1,5 @@
+require 'esa'
+
 module EsaFeeder
   module Gateways
     class EsaClient
