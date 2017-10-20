@@ -26,7 +26,7 @@ module EsaFeeder
       end
 
       def to_entity(raw)
-        EsaFeeder::Entities::EsaPost.new(
+        Entities::EsaPost.new(
           raw['number'],
           raw['full_name'],
           raw['url']
