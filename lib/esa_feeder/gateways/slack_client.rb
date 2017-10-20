@@ -1,3 +1,5 @@
+require 'slack-notifier'
+
 module EsaFeeder
   module Gateways
     class SlackClient
