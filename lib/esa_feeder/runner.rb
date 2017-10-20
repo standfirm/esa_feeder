@@ -11,10 +11,13 @@ module EsaFeeder
 
     def run(time: nil, user: 'esa_bot')
       time ||= Time.now
-      client.posts(q: query(time)).body['posts'].map do |post|
-        r = client.create_post(template_post_id: post['number'], user: user)
-        notify_slack(r.body['full_name'], r.body['url']) if notifier
-        { post['number'] => r.body['number'] }
+      client.posts(q: query(time)).body['posts'].map do |raw|
+        post = to_esa_entity(raw)
+        r = to_esa_entity(
+          client.create_post(template_post_id: post.number, user: user).body
+        )
+        notify_slack(r.full_name, r.url) if notifier
+        { post.number => r.number }
       end
     end
 
@@ -33,6 +36,14 @@ module EsaFeeder
         title_link: url,
         color: 'good'
       }]
+    end
+
+    def to_esa_entity(raw)
+      EsaFeeder::Entities::EsaPost.new(
+        raw['number'],
+        raw['full_name'],
+        raw['url']
+      )
     end
   end
 end
