@@ -9,23 +9,23 @@ module EsaFeeder
 
       def find_templates(tag)
         response = client.posts(q: "in:templates tag:#{tag}")
-        to_entities(response.body)
+        to_posts(response.body)
       end
 
       def create_from_template(post, user)
         response = client.create_post(template_post_id: post.number, user: user)
-        to_entity(response.body)
+        to_post(response.body)
       end
 
       private
 
       attr_reader :client
 
-      def to_entities(body)
-        body['posts'].map { |raw| to_entity(raw) }
+      def to_posts(body)
+        body['posts'].map { |raw| to_post(raw) }
       end
 
-      def to_entity(raw)
+      def to_post(raw)
         Entities::EsaPost.new(
           raw['number'],
           raw['full_name'],
