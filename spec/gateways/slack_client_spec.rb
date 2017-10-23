@@ -9,7 +9,7 @@ RSpec.describe EsaFeeder::Gateways::SlackClient do
     allow(driver).to receive(:post)
   end
 
-  it do
+  it '#notify_creation' do
     expect(driver)
       .to receive(:post)
       .once
