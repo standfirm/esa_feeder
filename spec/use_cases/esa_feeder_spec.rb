@@ -34,7 +34,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
 
     it 'Monday' do
       Timecop.travel(monday) do
-        expect(esa_client).to receive(:find_templates).once
+        expect(esa_client).to receive(:find_templates).with('feed_mon').once
         expect(esa_client).to receive(:create_from_template).exactly(templates.count)
         expect(slack_client).to receive(:notify_creation).exactly(templates.count)
         expect(described_class.new(esa_client, slack_client).call).to eq([{1 => 101}, {2 => 102}, {3 => 103},])
@@ -57,7 +57,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
 
     it 'Tuesday' do
       Timecop.travel(monday) do
-        expect(esa_client).to receive(:find_templates).once
+        expect(esa_client).to receive(:find_templates).with('feed_tue').once
         expect(esa_client).to receive(:create_from_template).exactly(templates.count)
         expect(slack_client).to receive(:notify_creation).exactly(templates.count)
         expect(described_class.new(esa_client, slack_client).call(time: tuesday)).to eq([{1 => 101}, {2 => 102}])
@@ -71,7 +71,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
 
     it 'called with user' do
       Timecop.travel(monday) do
-        expect(esa_client).to receive(:find_templates).once
+        expect(esa_client).to receive(:find_templates).with('feed_mon').once
         expect(esa_client).to receive(:create_from_template).with(templates[0], user)
         expect(slack_client).to receive(:notify_creation).exactly(templates.count)
         expect(described_class.new(esa_client, slack_client).call(user: user)).to eq([{1 => 101}, {2 => 102}, {3 => 103},])
