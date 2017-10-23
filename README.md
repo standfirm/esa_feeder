@@ -6,13 +6,21 @@
 
 ## How to Use
 
- 1. 繰り返し作成したい記事テンプレートを`templates/`以下に作成してください
- 1. その記事に作成したい曜日に応じた`#feed_xxx` タグを付けてください
-    1. `xxx`部分は記事を作成したい曜日の短縮名です。毎月曜日に作成する場合は`#feed_mon`、火曜日なら`#feed_tue`になります
-    1. タグは複数指定可能です。`#feed_mon #feed_fri`とすれば月曜日と金曜日に作成されます
- 1. `bundle exec thor templates:feed`を実行することで、その曜日の記事が自動作成されます
+繰り返し作成したい記事テンプレートを`templates/`以下に作成し、自動作成する曜日に応じた`#feed_xxx` タグを付けてください。　　  
+`xxx`部分は記事を作成したい曜日の短縮名です。以下のタグが使用できます。
 
-## Run Locally
+- `#feed_sun`
+- `#feed_mon`
+- `#feed_tue`
+- `#feed_wed`
+- `#feed_thu`
+- `#feed_fri`
+- `#feed_sat`
+
+例えば`#feed_mon`を付けた記事は月曜日のみ自動記事作成の対象になります。  
+複数指定も可能で、`#feed_mon #feed_fri`とすれば月曜日と金曜日に自動記事作成の対象になります。
+
+### Run Locally
 
 ```
 $ git checkout git@github.com:standfirm/esa_feeder.git
@@ -23,19 +31,21 @@ $ vi .env
 // setup environment variable
 ```
 
-で環境構築を行ってください。
-その後`bundle exec thor templates:feed`を実行することで、記事の自動作成が行われます。
+で環境構築を行ってください。  
+`bundle exec thor templates:feed`を実行することで、記事の自動作成が行われます。  
 毎日実行されるようcronを設定することで、曜日に応じた記事が自動生成されるようになります。
 
-## Run on Heroku
+### Run on Heroku
 
 以下のボタンから[Heroku](https://dashboard.heroku.com/)にデプロイできます。
-環境変数については、esaのチーム名とアクセストークンが指定必須です。
-Slack WebHook URLは入力すると記事が自動作成されたことを通知します。空の場合は通知をスキップします。
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/standfirm/esa_feeder/)
 
-その後、Heroku Scheduler上で`bundle exec thor templates:feed`が毎日実行されるよう設定を行ってください。
+
+環境変数については、esaのチーム名とアクセストークンが指定必須です。  
+Slack WebHook URLは入力すると記事が自動作成されたことを通知します。空の場合は通知をスキップします。
+
+その後、Heroku Scheduler上で`bundle exec thor templates:feed`が毎日実行されるよう設定を行ってください。  
 この際UTCでの設定になるため時差に注意してください。(0時に設定すると、日本時間9時に実行される)
 
 ## Test
@@ -43,3 +53,5 @@ Slack WebHook URLは入力すると記事が自動作成されたことを通知
 ```
 $ bundle exec rspec spec/
 ```
+
+でテストを実行できます。
