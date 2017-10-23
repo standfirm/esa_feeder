@@ -1,0 +1,27 @@
+{
+  "name": "esa feeder",
+  "description": "periodic post generator for esa.io",
+  "repository": "https://github.com/standfirm/esa_feeder",
+  "logo": "https://raw.githubusercontent.com/standfirm/master/heroku-button/logo.png",
+  "keywords": ["ruby", "esa.io"],
+  "env": {
+    "ESA_TEAM": {
+      "description": "esa.io team name"
+    },
+    "ESA_OWNER_API_TOKEN": {
+      "description": "esa.io personal access token. Get from https://your_team.esa.io/user/applications"
+    },
+    "SLACK_WEBHOOK_URL": {
+      "description": "Slack incoming webhook url. Get from https://your_team.slack.com/apps/manage/custom-integrations. If this variable is empty, then notification is disabled."
+    },
+    "LANG": {
+      "description": "Language Code",
+      "value": "en_US.UTF-8"
+    },
+    "TZ": {
+      "description": "Timezone Code",
+      "value": "Asia/Tokyo"
+    }
+  },
+  "addons": ["scheduler"]
+}
