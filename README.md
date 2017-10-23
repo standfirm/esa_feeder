@@ -1,6 +1,6 @@
 # EsaFeeder
 
-[![CircleCI](https://circleci.com/gh/standfirm/esa_feeder.svg?style=svg)](https://circleci.com/gh/standfirm/esa_feeder)
+[![CircleCI](https://circleci.com/gh/standfirm/esa_feeder.svg?style=svg&circle-token=b211037d0e100aae7eca4acea088966f26a71275)](https://circleci.com/gh/standfirm/esa_feeder)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/esa_feeder`. To experiment with that code, run `bin/console` for an interactive prompt.
 
