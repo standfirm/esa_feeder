@@ -39,7 +39,7 @@ $ vi .env
 
 以下のボタンから[Heroku](https://dashboard.heroku.com/)にデプロイできます。
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/standfirm/esa_feeder/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 環境変数については、esaのチーム名とアクセストークンが指定必須です。  
