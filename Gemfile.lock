@@ -37,6 +37,7 @@ GEM
     rspec-support (3.7.0)
     slack-notifier (2.3.1)
     thor (0.20.0)
+    timecop (0.9.1)
 
 PLATFORMS
   ruby
@@ -51,6 +52,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   slack-notifier
   thor
+  timecop
 
 BUNDLED WITH
    1.15.4
