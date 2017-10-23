@@ -15,7 +15,11 @@ module EsaFeeder
     private
 
     def esa_client
-      @esa_clinet ||= Gateways::EsaClient.new(ENV['ESA_OWNER_API_TOKEN'], ENV['ESA_TEAM'])
+      driver = Esa::Client.new(
+        access_token: ENV['ESA_OWNER_API_TOKEN'],
+        current_team: ENV['ESA_TEAM']
+      )
+      @esa_clinet ||= Gateways::EsaClient.new(driver)
     end
 
     def slack_client

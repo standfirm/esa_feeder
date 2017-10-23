@@ -3,23 +3,23 @@ require 'esa'
 module EsaFeeder
   module Gateways
     class EsaClient
-      def initialize(access_token, current_team)
-        @client = Esa::Client.new(access_token: access_token, current_team: current_team)
+      def initialize(driver)
+        @driver = driver
       end
 
       def find_templates(tag)
-        response = client.posts(q: "in:templates tag:#{tag}")
+        response = driver.posts(q: "in:templates tag:#{tag}")
         to_posts(response.body)
       end
 
       def create_from_template(post, user)
-        response = client.create_post(template_post_id: post.number, user: user)
+        response = driver.create_post(template_post_id: post.number, user: user)
         to_post(response.body)
       end
 
       private
 
-      attr_reader :client
+      attr_reader :driver
 
       def to_posts(body)
         body['posts'].map { |raw| to_post(raw) }
