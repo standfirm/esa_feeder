@@ -6,6 +6,8 @@ Welcome to your new gem! In this directory, you'll find the files you need to be
 
 TODO: Delete this and the text above, and describe your gem
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/standfirm/esa_feeder/)
+
 ## Installation
 
 Add this line to your application's Gemfile:
