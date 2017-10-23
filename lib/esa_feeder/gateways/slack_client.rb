@@ -3,12 +3,12 @@ require 'slack-notifier'
 module EsaFeeder
   module Gateways
     class SlackClient
-      def initialize(webhook_url)
-        @client = Slack::Notifier.new(webhook_url)
+      def initialize(driver)
+        @driver = driver
       end
 
       def notify_creation(message, post)
-        client.post attachments: [{
+        driver.post attachments: [{
           pretext: message,
           title: post.full_name,
           title_link: post.url,
@@ -18,7 +18,7 @@ module EsaFeeder
 
       private
 
-      attr_reader :client
+      attr_reader :driver
     end
   end
 end
