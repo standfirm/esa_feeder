@@ -2,12 +2,14 @@ require "spec_helper"
 
 RSpec.describe EsaFeeder::Gateways::SlackClient do
   let(:post) { EsaFeeder::Entities::EsaPost.new(99999, 'path/to/post/post_title #tag', 'https://example.com/posts/99999') }
+  let(:driver) { double('slack notifier') }
+  let(:target) { described_class.new(driver) }
+
+  before do
+    allow(driver).to receive(:post)
+  end
 
   it do
-    driver = double('slack notifier')
-    allow(driver).to receive(:post)
-    slack_client = described_class.new(driver)
-
     expect(driver)
       .to receive(:post)
       .once
@@ -17,6 +19,6 @@ RSpec.describe EsaFeeder::Gateways::SlackClient do
           title_link: 'https://example.com/posts/99999',
           color: 'good' }])
 
-    slack_client.notify_creation('message', post)
+    target.notify_creation('message', post)
   end
 end
