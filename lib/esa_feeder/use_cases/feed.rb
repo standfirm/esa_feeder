@@ -8,9 +8,9 @@ module EsaFeeder
         @notifier_port = notifier_port
       end
 
-      def call(time: nil, user: 'esa_bot')
-        time ||= Time.now
-        esa_port.find_templates(source_tag(time)).map do |template|
+      def call(tag: nil, user: 'esa_bot')
+        tag ||= SourceTag.new.call
+        esa_port.find_templates(tag).map do |template|
           post = esa_port.create_from_template(template, user)
           notifier_port&.notify_creation('新しい記事を作成しました', post)
           { template.number => post.number }
@@ -20,10 +20,6 @@ module EsaFeeder
       private
 
       attr_reader :esa_port, :notifier_port
-
-      def source_tag(time)
-        "feed_#{time.strftime('%a').downcase}"
-      end
     end
   end
 end
