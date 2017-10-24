@@ -11,7 +11,19 @@ module EsaFeeder
         category ? "#{category}/#{name}" : name
       end
 
+      def user_tags
+        tags - system_tags
+      end
+
       private
+
+      def system_tags
+        feed_tags + slack_tags
+      end
+
+      def feed_tags
+        tags.select { |tag| tag =~ /^feed_/ }
+      end
 
       def slack_tags
         tags.select { |tag| tag =~ /^slack_/ }
