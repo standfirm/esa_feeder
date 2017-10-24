@@ -6,16 +6,18 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
   let(:template) {
     EsaFeeder::Entities::EsaPost.new(
       99999,
-      'templates/category/test #feed_mon',
-      'https://example.com/posts/99999'
+      'templates/category/test #feed_mon #slack_hoge',
+      'https://example.com/posts/99999',
+      ['feed_mon', 'slack_hoge']
     ) }
 
   describe '#find_templates' do
     let(:body) do
       { 'posts' => [
         'number' => 99999,
-        'full_name' => 'templates/category/test #feed_mon',
-        'url' => 'https://example.com/posts/99999'
+        'full_name' => 'templates/category/test #feed_mon #slack_hoge',
+        'url' => 'https://example.com/posts/99999',
+        'tags' => ['feed_mon', 'slack_hoge']
       ]}
     end
     let(:response) { double('response', body: body) }
@@ -33,14 +35,16 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     let(:body) do
       { 'number' => 12345,
         'full_name' => 'category/test #feed_mon',
-        'url' => 'https://example.com/posts/12345' }
+        'url' => 'https://example.com/posts/12345',
+        'tags' => ['feed_mon'] }
     end
     let(:response) { double('response', body: body) }
     let(:post) {
       EsaFeeder::Entities::EsaPost.new(
         12345,
         'category/test #feed_mon',
-        'https://example.com/posts/12345'
+        'https://example.com/posts/12345',
+        ['feed_mon']
       ) }
 
     subject { target.create_from_template(template, 'bot_user') }

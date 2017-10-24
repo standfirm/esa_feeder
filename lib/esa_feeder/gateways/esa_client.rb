@@ -29,7 +29,8 @@ module EsaFeeder
         Entities::EsaPost.new(
           raw['number'],
           raw['full_name'],
-          raw['url']
+          raw['url'],
+          raw['tags']
         )
       end
     end
