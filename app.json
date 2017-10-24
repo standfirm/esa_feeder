@@ -2,7 +2,7 @@
   "name": "esa feeder",
   "description": "periodic post generator for esa.io",
   "repository": "https://github.com/standfirm/esa_feeder",
-  "logo": "https://raw.githubusercontent.com/standfirm/master/heroku-button/logo.png",
+  "logo": "https://raw.githubusercontent.com/standfirm/esa_feeder/master/logo.png",
   "keywords": ["ruby", "esa.io"],
   "env": {
     "ESA_TEAM": {

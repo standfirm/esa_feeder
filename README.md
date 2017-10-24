@@ -1,6 +1,6 @@
 # EsaFeeder
 
-[![CircleCI](https://circleci.com/gh/standfirm/esa_feeder.svg?style=svg&circle-token=b211037d0e100aae7eca4acea088966f26a71275)](https://circleci.com/gh/standfirm/esa_feeder)
+[![CircleCI](https://circleci.com/gh/standfirm/esa_feeder.svg?style=svg)](https://circleci.com/gh/standfirm/esa_feeder)
 
 [esa.io](https://esa.io/) のテンプレートから定期的に記事を自動作成するツールです。
 
@@ -39,7 +39,7 @@ $ vi .env
 
 以下のボタンから[Heroku](https://dashboard.heroku.com/)にデプロイできます。
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/standfirm/esa_feeder/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 環境変数については、esaのチーム名とアクセストークンが指定必須です。  
