@@ -5,6 +5,7 @@ require 'dotenv/load'
 require 'esa_feeder/version'
 require 'esa_feeder/entities/esa_post'
 require 'esa_feeder/use_cases/feed'
+require 'esa_feeder/use_cases/source_tag'
 require 'esa_feeder/gateways/esa_client'
 require 'esa_feeder/gateways/slack_client'
 
