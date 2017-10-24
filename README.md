@@ -20,6 +20,16 @@
 例えば`#feed_mon`を付けた記事は月曜日のみ自動記事作成の対象になります。  
 複数指定も可能で、`#feed_mon #feed_fri`とすれば月曜日と金曜日に自動記事作成の対象になります。
 
+### Notification to Slack
+
+自動作成時に、Slackの任意のChannelへ通知することができます。
+`#slack_xxx` のようなタグを付けるとSlackの `#xxx` へ通知されます。
+複数指定も可能です。
+
+指定が無い場合は通知は飛びません。WebHook側の設定は上書きされます。
+
+この機能を有効にするにはSLACK_WEBHOOK_URLの設定が必要です。
+
 ### Run Locally
 
 ```
