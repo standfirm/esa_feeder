@@ -1,4 +1,6 @@
-require "spec_helper"
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 RSpec.describe EsaFeeder::UseCases::Feed do
   let(:monday) { Time.local(2017, 10, 23) }
@@ -37,7 +39,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
   end
 
   context 'notifier not provided' do
-    let(:slack_client) {nil}
+    let(:slack_client) { nil }
     it 'create posts' do
       expect(subject).to eq(expected)
     end

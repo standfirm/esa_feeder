@@ -1,4 +1,6 @@
-require "spec_helper"
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 RSpec.describe EsaFeeder::Gateways::SlackClient do
   let(:post) { build(:esa_template, :with_slack_tag) }
@@ -12,13 +14,14 @@ RSpec.describe EsaFeeder::Gateways::SlackClient do
   it '#notify_creation' do
     expect(driver)
       .to receive(:post)
-            .once
-            .with(attachments: [{
-                                  pretext: 'message',
-                                  title: post.full_name,
-                                  title_link: post.url,
-                                  color: 'good'}],
-                  channel: ['hoge'])
+      .once
+      .with(attachments: [{
+              pretext: 'message',
+              title: post.full_name,
+              title_link: post.url,
+              color: 'good'
+            }],
+            channel: ['hoge'])
 
     target.notify_creation('message', post)
   end
