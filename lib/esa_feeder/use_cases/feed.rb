@@ -8,8 +8,7 @@ module EsaFeeder
         @notifier_port = notifier_port
       end
 
-      def call(tag: nil, user: 'esa_bot')
-        tag ||= SourceTag.new.call
+      def call(tag, user)
         esa_port.find_templates(tag).map do |template|
           post = esa_port.create_from_template(template, user)
           notifier_port&.notify_creation('新しい記事を作成しました', post)
