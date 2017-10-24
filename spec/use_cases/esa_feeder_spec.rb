@@ -15,7 +15,9 @@ RSpec.describe EsaFeeder::UseCases::Feed do
     ]
   end
 
-  subject { described_class.new(esa_client, slack_client).call(tag: 'feed_mon') }
+  subject do
+    described_class.new(esa_client, slack_client).call(tag: 'feed_mon')
+  end
 
   before do
     expect(esa_client).to receive(:find_templates)
