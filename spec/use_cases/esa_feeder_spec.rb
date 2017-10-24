@@ -6,7 +6,9 @@ RSpec.describe EsaFeeder::UseCases::Feed do
   let(:esa_client) { double('esa client') }
 
   let(:templates) { build_list(:esa_template, 2) }
-  let(:posts) { build_list(:esa_post, 2) }
+  let(:posts) do
+    build_list(:esa_post, 2, tags: %w[hoge feed_mon fuga slack_test])
+  end
 
   let(:expected) do
     [
@@ -23,12 +25,17 @@ RSpec.describe EsaFeeder::UseCases::Feed do
     expect(esa_client).to receive(:find_templates)
       .with('feed_mon').once
       .and_return(templates)
-    expect(esa_client).to receive(:create_from_template)
-      .with(templates[0], 'esa_bot').once
-      .and_return(posts[0])
-    expect(esa_client).to receive(:create_from_template)
-      .with(templates[1], 'esa_bot').once
-      .and_return(posts[1])
+    (0..1).each do |n|
+      expect(esa_client).to receive(:create_from_template)
+        .with(templates[n], 'esa_bot').once
+        .and_return(posts[n])
+      expect(esa_client).to receive(:update_post)
+        .with(
+          have_attributes(number: posts[n].number,
+                          tags: %w[hoge fuga]),
+          'esa_bot'
+        ).once
+    end
   end
 
   context 'notifier provided' do

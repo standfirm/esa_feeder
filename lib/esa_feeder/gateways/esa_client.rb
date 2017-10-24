@@ -19,6 +19,13 @@ module EsaFeeder
         to_post(response.body)
       end
 
+      def update_post(post, user)
+        response = driver.update_post(
+          post.number, tags: post.tags, updated_by: user
+        )
+        to_post(response.body)
+      end
+
       private
 
       attr_reader :driver
@@ -30,7 +37,8 @@ module EsaFeeder
       def to_post(raw)
         Entities::EsaPost.new(
           raw['number'],
-          raw['full_name'],
+          raw['category'],
+          raw['name'],
           raw['url'],
           raw['tags']
         )

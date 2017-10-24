@@ -11,7 +11,8 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     let(:body) do
       { 'posts' => [
         'number' => template.number,
-        'full_name' => template.full_name,
+        'category' => template.category,
+        'name' => template.name,
         'url' => template.url,
         'tags' => template.tags
       ] }
@@ -31,7 +32,8 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     let(:post) { build(:esa_post) }
     let(:body) do
       { 'number' => post.number,
-        'full_name' => post.full_name,
+        'category' => post.category,
+        'name' => post.name,
         'url' => post.url,
         'tags' => post.tags }
     end
@@ -42,6 +44,27 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     it 'return created post' do
       allow(driver).to receive(:create_post)
         .with(template_post_id: template.number, user: 'bot_user')
+        .and_return(response)
+      expect(subject).to eq(post)
+    end
+  end
+
+  describe '#update_post' do
+    let(:post) { build(:esa_post) }
+    let(:body) do
+      { 'number' => post.number,
+        'category' => post.category,
+        'name' => post.name,
+        'url' => post.url,
+        'tags' => post.tags }
+    end
+    let(:response) { double('response', body: body) }
+
+    subject { target.update_post(post, 'bot_user') }
+
+    it 'return updated post' do
+      allow(driver).to receive(:update_post)
+        .with(post.number, tags: post.tags, updated_by: 'bot_user')
         .and_return(response)
       expect(subject).to eq(post)
     end
