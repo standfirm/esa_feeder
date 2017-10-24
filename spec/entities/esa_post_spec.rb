@@ -56,4 +56,19 @@ RSpec.describe EsaFeeder::Entities::EsaPost do
       it { expect(subject).to eq('path/to/post/test_post') }
     end
   end
+
+  describe '#user_tags' do
+    let(:post) { build(:esa_post, tags: tags) }
+    subject { post.user_tags }
+
+    context 'not contain system_tags' do
+      let(:tags) { %w[hoge fuga] }
+      it { expect(subject).to eq(%w[hoge fuga]) }
+    end
+
+    context 'contain system_tags' do
+      let(:tags) { %w[hoge feed_mon feed_fri slack_test fuga] }
+      it { expect(subject).to eq(%w[hoge fuga]) }
+    end
+  end
 end
