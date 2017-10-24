@@ -10,3 +10,7 @@ gem 'esa'
 gem 'pry'
 gem 'thor'
 gem 'slack-notifier'
+
+group :test do
+  gem 'factory_bot'
+end
