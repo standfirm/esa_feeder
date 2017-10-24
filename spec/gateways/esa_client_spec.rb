@@ -11,7 +11,8 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     let(:body) do
       { 'posts' => [
         'number' => template.number,
-        'full_name' => template.full_name,
+        'category' => template.category,
+        'name' => template.name,
         'url' => template.url,
         'tags' => template.tags
       ] }
@@ -31,7 +32,8 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     let(:post) { build(:esa_post) }
     let(:body) do
       { 'number' => post.number,
-        'full_name' => post.full_name,
+        'category' => post.category,
+        'name' => post.name,
         'url' => post.url,
         'tags' => post.tags }
     end

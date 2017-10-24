@@ -30,7 +30,8 @@ module EsaFeeder
       def to_post(raw)
         Entities::EsaPost.new(
           raw['number'],
-          raw['full_name'],
+          raw['category'],
+          raw['name'],
           raw['url'],
           raw['tags']
         )
