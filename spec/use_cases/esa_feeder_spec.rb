@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe EsaFeeder::UseCases::Feed do
-  let(:monday) { Time.local(2017, 10, 23) }
   let(:esa_client) { double('esa client') }
 
   let(:templates) { build_list(:esa_template, 2) }
@@ -16,7 +15,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
     ]
   end
 
-  subject { described_class.new(esa_client, slack_client).call(time: monday) }
+  subject { described_class.new(esa_client, slack_client).call(tag: 'feed_mon') }
 
   before do
     expect(esa_client).to receive(:find_templates)
