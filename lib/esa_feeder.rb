@@ -13,7 +13,7 @@ module EsaFeeder
   class << self
     def feed
       UseCases::Feed.new(esa_client, slack_client)
-                    .call(SourceTag.new.call, 'esa_bot')
+                    .call(UseCases::SourceTag.new.call, 'esa_bot')
     end
 
     private
