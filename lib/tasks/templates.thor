@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'esa_feeder'
 require 'logger'
 
@@ -8,7 +10,7 @@ class Templates < Thor
     logger.info('feed task start')
     begin
       logger.info(EsaFeeder.feed)
-    rescue => e
+    rescue StandardError => e
       logger.error(e)
     end
     logger.info('feed task finished')

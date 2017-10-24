@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe EsaFeeder::Gateways::EsaClient do
@@ -12,7 +14,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
         'full_name' => template.full_name,
         'url' => template.url,
         'tags' => template.tags
-      ]}
+      ] }
     end
     let(:response) { double('response', body: body) }
 
@@ -20,7 +22,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
 
     it 'return templates' do
       allow(driver).to receive(:posts).with(q: 'in:templates tag:test_tag')
-        .and_return(response)
+                                      .and_return(response)
       expect(subject).to eq([template])
     end
   end

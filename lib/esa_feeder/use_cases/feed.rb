@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EsaFeeder
   module UseCases
     class Feed
