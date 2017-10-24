@@ -9,11 +9,12 @@ module EsaFeeder
 
       def notify_creation(message, post)
         driver.post attachments: [{
-          pretext: message,
-          title: post.full_name,
-          title_link: post.url,
-          color: 'good'
-        }]
+                                    pretext: message,
+                                    title: post.full_name,
+                                    title_link: post.url,
+                                    color: 'good'
+                                  }],
+                    channel: post.slack_channels
       end
 
       private
