@@ -1,7 +1,11 @@
 require "spec_helper"
 
 RSpec.describe EsaFeeder::Gateways::SlackClient do
-  let(:post) { EsaFeeder::Entities::EsaPost.new(99999, 'path/to/post/post_title #tag', 'https://example.com/posts/99999') }
+  let(:post) { EsaFeeder::Entities::EsaPost.new(
+    99999,
+    'path/to/post/post_title #tag',
+    'https://example.com/posts/99999',
+    ['feed_mon', 'slack_hoge', 'feed_tue', 'slack_foo']) }
   let(:driver) { double('slack notifier') }
   let(:target) { described_class.new(driver) }
 
@@ -12,12 +16,13 @@ RSpec.describe EsaFeeder::Gateways::SlackClient do
   it '#notify_creation' do
     expect(driver)
       .to receive(:post)
-      .once
-      .with(attachments: [{
-          pretext: 'message',
-          title: 'path/to/post/post_title #tag',
-          title_link: 'https://example.com/posts/99999',
-          color: 'good' }])
+            .once
+            .with(attachments: [{
+                                  pretext: 'message',
+                                  title: 'path/to/post/post_title #tag',
+                                  title_link: 'https://example.com/posts/99999',
+                                  color: 'good'}],
+                  channel: ['hoge', 'foo'])
 
     target.notify_creation('message', post)
   end
