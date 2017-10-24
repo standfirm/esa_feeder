@@ -11,6 +11,10 @@ gem 'pry'
 gem 'thor'
 gem 'slack-notifier'
 
+group :development, :test do
+  gem 'rubocop'
+end
+
 group :test do
   gem 'factory_bot'
 end
