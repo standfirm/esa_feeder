@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :esa_post, class: EsaFeeder::Entities::EsaPost do
     sequence :number

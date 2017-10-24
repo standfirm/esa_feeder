@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dotenv/load'
 
 require 'esa_feeder/version'
@@ -23,9 +25,10 @@ module EsaFeeder
     end
 
     def slack_client
+      return unless ENV['SLACK_WEBHOOK_URL']
       @slack_client ||= Gateways::SlackClient.new(
         Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-      ) if ENV['SLACK_WEBHOOK_URL']
+      )
     end
   end
 end

@@ -1,6 +1,8 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+source 'https://rubygems.org'
+
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # Specify your gem's dependencies in esa_feeder.gemspec
 gemspec
@@ -8,8 +10,8 @@ gemspec
 gem 'dotenv'
 gem 'esa'
 gem 'pry'
-gem 'thor'
 gem 'slack-notifier'
+gem 'thor'
 
 group :development, :test do
   gem 'rubocop'
