@@ -4,28 +4,37 @@ require 'spec_helper'
 
 RSpec.describe EsaFeeder::UseCases::Feed do
   let(:esa_client) { double('esa client') }
-
-  let(:templates) { build_list(:esa_template, 2) }
+  let(:mon_templates) { build_list(:esa_template, 2) }
+  let(:wday_templates) { build_list(:esa_template, 2, tags: %w[tag feed_wday]) }
+  let(:templates) { mon_templates + wday_templates }
   let(:posts) do
-    build_list(:esa_post, 2, tags: %w[hoge feed_mon fuga slack_test])
+    build_list(:esa_post, 4, tags: %w[hoge feed_mon fuga slack_test])
   end
 
   let(:expected) do
     [
       { templates[0].number => posts[0].number },
-      { templates[1].number => posts[1].number }
+      { templates[1].number => posts[1].number },
+      { wday_templates[0].number => posts[2].number },
+      { wday_templates[1].number => posts[3].number }
     ]
   end
 
   subject do
-    described_class.new(esa_client, slack_client).call('feed_mon', 'esa_bot')
+    described_class.new(esa_client, slack_client)
+                   .call(%w[feed_mon feed_wday], 'esa_bot')
   end
 
   before do
     expect(esa_client).to receive(:find_templates)
       .with('feed_mon').once
-      .and_return(templates)
-    (0..1).each do |n|
+      .and_return(mon_templates)
+
+    expect(esa_client).to receive(:find_templates)
+      .with('feed_wday').once
+      .and_return(wday_templates)
+
+    (0..3).each do |n|
       expect(esa_client).to receive(:create_from_template)
         .with(templates[n], 'esa_bot').once
         .and_return(posts[n])

@@ -8,8 +8,8 @@ module EsaFeeder
         @notifier_port = notifier_port
       end
 
-      def call(tag, user)
-        esa_port.find_templates(tag).map do |template|
+      def call(tags, user)
+        find_templates(tags).map do |template|
           post = esa_port.create_from_template(template, user)
           notifier_port&.notify_creation('新しい記事を作成しました', post)
           # remove system tags from generated post
@@ -22,6 +22,12 @@ module EsaFeeder
       private
 
       attr_reader :esa_port, :notifier_port
+
+      def find_templates(tags)
+        tags.map do |tag|
+          esa_port.find_templates(tag)
+        end.flatten
+      end
     end
   end
 end
