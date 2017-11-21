@@ -21,7 +21,8 @@ RSpec.describe EsaFeeder::UseCases::Feed do
   end
 
   subject do
-    described_class.new(esa_client, slack_client).call('feed_mon', 'esa_bot')
+    described_class.new(esa_client, slack_client)
+                   .call(%w[feed_mon feed_wday], 'esa_bot')
   end
 
   before do
