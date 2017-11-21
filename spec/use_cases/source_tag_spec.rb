@@ -4,8 +4,9 @@ require 'spec_helper'
 
 RSpec.describe EsaFeeder::UseCases::SourceTag do
   let(:tags) do
-    (0..6).map { |n| described_class.new(Time.local(2017, 1, 1 + n)).call }
+    (0..6).map { |n| described_class.new(Time.local(2017, 4, 2 + n)).call }
   end
+  let(:holiday_tags) { described_class.new(Time.local(2017, 11, 23)).call }
 
   let(:ref) { %w[sun mon tue wed thu fri sat] }
 
@@ -17,8 +18,13 @@ RSpec.describe EsaFeeder::UseCases::SourceTag do
     (1..5).map { |n| expect(tags[n]).to include('feed_wday') }
   end
 
-  it 'do not include tag #feed_wday on holiday' do
+  it 'do not include tag #feed_wday on weekend' do
     expect(tags[0]).not_to include('feed_wday')
     expect(tags[6]).not_to include('feed_wday')
+  end
+
+  it 'do not include tag #feed_wday on public holiday' do
+    expect(holiday_tags).not_to include('feed_wday')
+    expect(holiday_tags).to include('feed_thu')
   end
 end
