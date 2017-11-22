@@ -15,6 +15,10 @@ module EsaFeeder
         tags - system_tags
       end
 
+      def me_tags
+        tags.select { |tag| tag =~ /^me_/ }
+      end
+
       private
 
       def system_tags
