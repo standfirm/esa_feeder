@@ -8,6 +8,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
     let(:mon_templates) { build_list(:esa_template, 2) }
     let(:wday_templates) { build_list(:esa_template, 2, tags: %w[tag feed_wday]) }
     let(:templates) { mon_templates + wday_templates }
+    let(:token_screen_name) { 'test' }
     let(:posts) do
       build_list(:esa_post, 4, tags: %w[hoge feed_mon fuga slack_test])
     end
@@ -32,6 +33,8 @@ RSpec.describe EsaFeeder::UseCases::Feed do
       expect(esa_client).to receive(:find_templates)
         .with('feed_wday').once
         .and_return(wday_templates)
+
+      expect(esa_client).to receive(:token_screen_name).at_least(4).times.and_return(token_screen_name)
 
       (0..3).each do |n|
         expect(esa_client).to receive(:create_from_template)
@@ -65,6 +68,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
   describe 'tags contains me_tags' do
     let(:esa_client) { double('esa client') }
     let(:slack_client) { nil }
+    let(:token_screen_name) { 'test' }
     let(:me_templates) { build_list(:esa_template, 2, tags: %w[tag feed_wday me_test]) }
     let(:me_posts) do
       build_list(:esa_post, 2, name: 'testの日報', tags: %w[tag feed_wday me_test])
@@ -82,6 +86,8 @@ RSpec.describe EsaFeeder::UseCases::Feed do
         .with('feed_wday').once
         .and_return(me_templates)
 
+      expect(esa_client).to receive(:token_screen_name).at_least(2).times.and_return(token_screen_name)
+
       (0..1).each do |n|
         expect(esa_client).to receive(:create_from_template)
           .with(me_templates[n], 'esa_bot').once
@@ -91,7 +97,7 @@ RSpec.describe EsaFeeder::UseCases::Feed do
           .with(
             have_attributes(number: me_posts[n].number,
                             tags: %w[tag],
-                            name: 'testの日報'),
+                            name: token_screen_name + 'の日報'),
             'esa_bot'
           ).once
       end

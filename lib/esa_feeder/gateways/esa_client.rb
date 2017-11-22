@@ -26,6 +26,10 @@ module EsaFeeder
         to_post(response.body)
       end
 
+      def token_screen_name
+        driver.user.body['screen_name']
+      end
+
       private
 
       attr_reader :driver

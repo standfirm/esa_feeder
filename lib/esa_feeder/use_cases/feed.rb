@@ -15,7 +15,7 @@ module EsaFeeder
             notifier_port&.notify_creation('新しい記事を作成しました', post)
             # remove system tags from generated post
             post.tags = post.user_tags
-            post.name = post.name.gsub(/temma_fukaya/, feed_user)
+            post.name = post.name.gsub(/#{esa_port.token_screen_name}/, feed_user)
             esa_port.update_post(post, user)
             { template.number => post.number }
           end
