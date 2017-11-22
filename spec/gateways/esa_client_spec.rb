@@ -64,7 +64,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
 
     it 'return updated post' do
       allow(driver).to receive(:update_post)
-        .with(post.number, tags: post.tags, updated_by: 'bot_user')
+        .with(post.number, name: post.name, tags: post.tags, updated_by: 'bot_user')
         .and_return(response)
       expect(subject).to eq(post)
     end

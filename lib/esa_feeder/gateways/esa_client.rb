@@ -21,7 +21,7 @@ module EsaFeeder
 
       def update_post(post, user)
         response = driver.update_post(
-          post.number, tags: post.tags, updated_by: user
+          post.number, name: post.name, tags: post.tags, updated_by: user
         )
         to_post(response.body)
       end
