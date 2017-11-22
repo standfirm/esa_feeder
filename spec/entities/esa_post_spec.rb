@@ -72,18 +72,18 @@ RSpec.describe EsaFeeder::Entities::EsaPost do
     end
   end
 
-  describe '#me_tags' do
+  describe '#feed_users' do
     let(:post) { build(:esa_template, tags: tags) }
-    subject { post.me_tags }
+    subject { post.feed_users }
 
     context 'not contain me_tags' do
       let(:tags) { %w[hoge fuga] }
-      it { expect(subject).to eq(%w[]) }
+      it { expect(subject).to eq(%w[esa_bot]) }
     end
 
     context 'contain me_tags' do
       let(:tags) { %w[hoge fuga me_test] }
-      it { expect(subject).to eq(%w[me_test]) }
+      it { expect(subject).to eq(%w[test]) }
     end
   end
 end

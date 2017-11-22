@@ -15,14 +15,18 @@ module EsaFeeder
         tags - system_tags
       end
 
-      def me_tags
-        tags.select { |tag| tag =~ /^me_/ }
+      def feed_users
+        if me_tags.empty?
+          ['esa_bot']
+        else
+          me_tags.map { |tag| tag.gsub(/^me_/, '') }
+        end
       end
 
       private
 
       def system_tags
-        feed_tags + slack_tags
+        feed_tags + slack_tags + me_tags
       end
 
       def feed_tags
@@ -31,6 +35,10 @@ module EsaFeeder
 
       def slack_tags
         tags.select { |tag| tag =~ /^slack_/ }
+      end
+
+      def me_tags
+        tags.select { |tag| tag =~ /^me_/ }
       end
     end
   end
