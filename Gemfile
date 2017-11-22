@@ -9,6 +9,7 @@ gemspec
 
 gem 'dotenv'
 gem 'esa'
+gem 'holiday_japan'
 gem 'pry'
 gem 'slack-notifier'
 gem 'thor'
