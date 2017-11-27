@@ -1,6 +1,13 @@
 Style/Documentation:
   Enabled: false
 
+Metrics/LineLength:
+  Max: 128
+
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+  ExcludedMethods: Struct.new
