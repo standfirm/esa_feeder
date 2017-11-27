@@ -12,8 +12,7 @@ require 'esa_feeder/gateways/slack_client'
 module EsaFeeder
   class << self
     def feed
-      UseCases::Feed.new(esa_client, slack_client)
-                    .call(UseCases::SourceTag.new.call, 'esa_bot')
+      UseCases::Feed.new(esa_client, slack_client).call(UseCases::SourceTag.new.call)
     end
 
     private
