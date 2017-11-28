@@ -10,7 +10,7 @@ module EsaFeeder
       end
 
       def find_templates(tag)
-        response = driver.posts(q: "category:templates tag:#{tag}")
+        response = driver.posts(q: "category:templates -in:Archived tag:#{tag}")
         to_posts(response.body)
       end
 
