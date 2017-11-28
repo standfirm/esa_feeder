@@ -22,7 +22,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     subject { target.find_templates('test_tag') }
 
     it 'return templates' do
-      allow(driver).to receive(:posts).with(q: 'in:templates tag:test_tag')
+      allow(driver).to receive(:posts).with(q: 'category:templates tag:test_tag')
                                       .and_return(response)
       expect(subject).to eq([template])
     end
