@@ -73,7 +73,8 @@ RSpec.describe EsaFeeder::Entities::EsaPost do
   end
 
   describe '#feed_users' do
-    let(:post) { build(:esa_template, tags: tags) }
+    let(:category) { 'templates/path/to/post' }
+    let(:post) { build(:esa_template, category: category, tags: tags) }
     subject { post.feed_users }
 
     context 'not contain me_tags' do
@@ -84,6 +85,12 @@ RSpec.describe EsaFeeder::Entities::EsaPost do
     context 'contain me_tags' do
       let(:tags) { %w[hoge fuga me_test] }
       it { expect(subject).to eq(%w[test]) }
+    end
+
+    context 'user private templates' do
+      let(:tags) { %w[hoge fuga me_test] }
+      let(:category) { 'Users/piyo/templates/path/to/post' }
+      it { expect(subject).to eq(%w[piyo]) }
     end
   end
 end

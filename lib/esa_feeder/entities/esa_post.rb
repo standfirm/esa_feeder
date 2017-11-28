@@ -16,10 +16,12 @@ module EsaFeeder
       end
 
       def feed_users
-        if me_tags.empty?
-          ['esa_bot']
-        else
+        if private_template?
+          [category_user]
+        elsif me_tags_present?
           me_tags.map { |tag| tag.gsub(/^me_/, '') }
+        else
+          ['esa_bot']
         end
       end
 
@@ -37,8 +39,20 @@ module EsaFeeder
         tags.select { |tag| tag =~ /^slack_/ }
       end
 
+      def me_tags_present?
+        !me_tags.empty?
+      end
+
       def me_tags
         tags.select { |tag| tag =~ /^me_/ }
+      end
+
+      def private_template?
+        !category_user.nil?
+      end
+
+      def category_user
+        category[%r{Users/(\w+)/templates}, 1]
       end
     end
   end
