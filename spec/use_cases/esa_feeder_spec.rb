@@ -77,6 +77,18 @@ RSpec.describe EsaFeeder::UseCases::Feed do
     it_behaves_like 'create post from templates'
   end
 
+  context 'everyday_templates' do
+    let(:templates) { build_list(:esa_template, 2, tags: %w[tag feed_eday]) }
+    let(:tag) { 'feed_eday' }
+    let(:posts) do
+      build_list(:esa_post, 2, tags: %w[hoge feed_eday fuga slack_test])
+    end
+
+    include_context 'mock esa api', 0, 0, 'esa_bot'
+    include_context 'mock esa api', 1, 1, 'esa_bot'
+    it_behaves_like 'create post from templates'
+  end
+
   context 'me_templates' do
     let(:templates) { build_list(:esa_template, 1, tags: %w[tag feed_wday me_hoge me_fuga]) }
     let(:tag) { 'feed_wday' }

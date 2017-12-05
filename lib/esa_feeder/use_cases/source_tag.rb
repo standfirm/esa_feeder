@@ -10,7 +10,7 @@ module EsaFeeder
       end
 
       def call
-        [day_of_the_week_feed, weekday_feed].reject(&:nil?)
+        [day_of_the_week_feed, weekday_feed, everyday_feed].reject(&:nil?)
       end
 
       private
@@ -23,6 +23,10 @@ module EsaFeeder
 
       def weekday_feed
         'feed_wday' if (1..5).cover?(time.wday) && !holiday?
+      end
+
+      def everyday_feed
+        'feed_eday'
       end
 
       def holiday?
