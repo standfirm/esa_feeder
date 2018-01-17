@@ -14,6 +14,11 @@ module EsaFeeder
         to_posts(response.body)
       end
 
+      def find_expired_posts(category, date)
+        response = driver.posts(q: "category:#{category} kind:flow -in:Archived updated:<#{date}")
+        to_posts(response.body)
+      end
+
       def create_from_template(post, user)
         response = driver.create_post(template_post_id: post.number, user: user)
         to_post(response.body)
@@ -21,7 +26,7 @@ module EsaFeeder
 
       def update_post(post, user)
         response = driver.update_post(
-          post.number, tags: post.tags, updated_by: user
+          post.number, tags: post.tags, category: post.category, updated_by: user
         )
         to_post(response.body)
       end

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'dotenv/load'
+require 'date'
 
 require 'esa_feeder/version'
 require 'esa_feeder/entities/esa_post'
 require 'esa_feeder/use_cases/feed'
+require 'esa_feeder/use_cases/archive'
 require 'esa_feeder/use_cases/source_tag'
 require 'esa_feeder/gateways/esa_client'
 require 'esa_feeder/gateways/slack_client'
@@ -13,6 +15,10 @@ module EsaFeeder
   class << self
     def feed
       UseCases::Feed.new(esa_client, slack_client).call(UseCases::SourceTag.new.call)
+    end
+
+    def archive
+      UseCases::Archive.new(esa_client).call(ENV['ESA_ARCHIVE_CATEGORY'], ENV['ESA_ARCHIVE_ELAPSED_MONTH'])
     end
 
     private
