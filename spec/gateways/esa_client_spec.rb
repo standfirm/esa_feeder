@@ -28,6 +28,28 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     end
   end
 
+  describe '#find_expired_posts' do
+    let(:post) { build(:esa_post) }
+    let(:body) do
+      { 'posts' => [
+        'number' => post.number,
+        'category' => post.category,
+        'name' => post.name,
+        'url' => post.url,
+        'tags' => post.tags
+      ] }
+    end
+    let(:response) { double('response', body: body) }
+
+    subject { target.find_expired_posts('path/to/post', '2018-01') }
+
+    it 'return posts' do
+      allow(driver).to receive(:posts).with(q: 'category:path/to/post kind:flow -in:Archived updated:<2018-01')
+                                      .and_return(response)
+      expect(subject).to eq([post])
+    end
+  end
+
   describe '#create_from_template' do
     let(:post) { build(:esa_post) }
     let(:body) do
@@ -64,7 +86,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
 
     it 'return updated post' do
       allow(driver).to receive(:update_post)
-        .with(post.number, tags: post.tags, updated_by: 'bot_user')
+        .with(post.number, tags: post.tags, category: post.category, updated_by: 'bot_user')
         .and_return(response)
       expect(subject).to eq(post)
     end

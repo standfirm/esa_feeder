@@ -25,6 +25,10 @@ module EsaFeeder
         end
       end
 
+      def archived_category
+        "Archived/#{category}"
+      end
+
       private
 
       def system_tags
