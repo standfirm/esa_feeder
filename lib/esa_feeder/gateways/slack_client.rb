@@ -17,6 +17,9 @@ module EsaFeeder
           color: 'good'
         }],
                     channel: post.slack_channels
+      rescue Slack::Notifier::APIError => e
+        puts e.inspect
+        nil
       end
 
       private
