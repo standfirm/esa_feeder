@@ -90,5 +90,8 @@ DEPENDENCIES
   slack-notifier
   thor
 
+RUBY VERSION
+   ruby 2.4.5p335
+
 BUNDLED WITH
-   1.16.0
+   1.17.3
