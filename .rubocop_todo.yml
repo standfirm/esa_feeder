@@ -1,0 +1,14 @@
+Metrics/BlockLength:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Layout/LeadingBlankLines:
+  Enabled: false

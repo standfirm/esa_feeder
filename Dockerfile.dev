@@ -1,4 +1,4 @@
-FROM ruby:2.4.5-alpine3.9
+FROM ruby:2.5.3-alpine3.9
 
 RUN apk update && apk add g++ git make
 
