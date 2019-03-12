@@ -6,14 +6,14 @@ FactoryBot.define do
     category { 'path/to/post' }
     name { "post_title_#{number}" }
     url { "https://example.com/posts/#{number}" }
-    tags %w[tag]
+    tags { %w[tag] }
 
     factory :esa_template do
-      tags %w[tag feed_mon]
+      tags { %w[tag feed_mon] }
       category { 'templates/path/to/post' }
 
       trait :with_slack_tag do
-        tags %w[tag feed_mon slack_hoge hoge_slack_fuga]
+        tags { %w[tag feed_mon slack_hoge hoge_slack_fuga] }
       end
     end
   end
