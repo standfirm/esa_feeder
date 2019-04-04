@@ -37,15 +37,26 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
         'url' => post.url,
         'tags' => post.tags }
     end
-    let(:response) { double('response', body: body) }
+    let(:error) { nil }
+    let(:response) { double('response', body: body, error: error) }
 
-    subject { target.create_from_template(template, 'bot_user') }
-
-    it 'return created post' do
+    before do
       allow(driver).to receive(:create_post)
         .with(template_post_id: template.number, user: 'bot_user')
         .and_return(response)
+    end
+    subject { target.create_from_template(template, 'bot_user') }
+
+    it 'return created post' do
       expect(subject).to eq(post)
+    end
+
+    context 'api returns error' do
+      let(:error) { 'some errors' }
+
+      it 'raise exeption' do
+        expect { subject }.to raise_exception(EsaFeeder::Gateways::EsaClient::PostCreateError)
+      end
     end
   end
 
@@ -58,15 +69,27 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
         'url' => post.url,
         'tags' => post.tags }
     end
-    let(:response) { double('response', body: body) }
+    let(:error) { nil }
+    let(:response) { double('response', body: body, error: error) }
+
+    before do
+      allow(driver).to receive(:update_post)
+        .with(post.number, tags: post.tags, updated_by: 'bot_user')
+        .and_return(response)
+    end
 
     subject { target.update_post(post, 'bot_user') }
 
     it 'return updated post' do
-      allow(driver).to receive(:update_post)
-        .with(post.number, tags: post.tags, updated_by: 'bot_user')
-        .and_return(response)
       expect(subject).to eq(post)
+    end
+
+    context 'api returns error' do
+      let(:error) { 'some error' }
+
+      it 'raise exeption' do
+        expect { subject }.to raise_exception(EsaFeeder::Gateways::EsaClient::PostUpdateError)
+      end
     end
   end
 end
