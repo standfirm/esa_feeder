@@ -33,6 +33,10 @@ module EsaFeeder
         post.tags = post.user_tags
         esa_port.update_post(post, feed_user)
         { template.number => post.number }
+      rescue StandardError => e
+        # continue other processing
+        puts e.inspect
+        {}
       end
     end
   end
