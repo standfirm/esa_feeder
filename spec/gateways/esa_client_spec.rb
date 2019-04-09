@@ -37,8 +37,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
         'url' => post.url,
         'tags' => post.tags }
     end
-    let(:error) { nil }
-    let(:response) { double('response', body: body, error: error) }
+    let(:response) { double('response', body: body) }
 
     before do
       allow(driver).to receive(:create_post)
@@ -52,7 +51,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     end
 
     context 'api returns error' do
-      let(:error) { 'some errors' }
+      let(:body) { { 'error' => 'some errors' } }
 
       it 'raise exeption' do
         expect { subject }.to raise_exception(EsaFeeder::Gateways::EsaClient::PostCreateError)
@@ -69,8 +68,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
         'url' => post.url,
         'tags' => post.tags }
     end
-    let(:error) { nil }
-    let(:response) { double('response', body: body, error: error) }
+    let(:response) { double('response', body: body) }
 
     before do
       allow(driver).to receive(:update_post)
@@ -85,7 +83,7 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     end
 
     context 'api returns error' do
-      let(:error) { 'some error' }
+      let(:body) { { 'error' => 'some errors' } }
 
       it 'raise exeption' do
         expect { subject }.to raise_exception(EsaFeeder::Gateways::EsaClient::PostUpdateError)

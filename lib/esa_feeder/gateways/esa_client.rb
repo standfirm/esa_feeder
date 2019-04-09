@@ -20,7 +20,7 @@ module EsaFeeder
       def create_from_template(post, user)
         response = driver.create_post(template_post_id: post.number, user: user)
         # error happen when user does not exists
-        raise PostCreateError, response.to_s if response.error
+        raise PostCreateError, response.to_s if response.body['error']
         to_post(response.body)
       end
 
@@ -29,7 +29,7 @@ module EsaFeeder
           post.number, tags: post.tags, updated_by: user
         )
         # error happen when user does not exists
-        raise PostUpdateError, response.to_s if response.error
+        raise PostUpdateError, response.to_s if response.body['error']
         to_post(response.body)
       end
 
