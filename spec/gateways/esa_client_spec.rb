@@ -22,8 +22,9 @@ RSpec.describe EsaFeeder::Gateways::EsaClient do
     subject { target.find_templates('test_tag') }
 
     it 'return templates' do
-      allow(driver).to receive(:posts).with(q: 'category:templates -in:Archived tag:test_tag')
-                                      .and_return(response)
+      query = 'category:templates -in:Archived tag:test_tag OR category:Templates -in:Archived tag:test_tag'
+
+      allow(driver).to receive(:posts).with(q: query).and_return(response)
       expect(subject).to eq([template])
     end
   end

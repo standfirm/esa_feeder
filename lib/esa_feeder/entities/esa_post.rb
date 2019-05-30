@@ -52,7 +52,7 @@ module EsaFeeder
       end
 
       def category_user
-        category[%r{Users/(\w+)/templates}, 1]
+        category[%r{Users/(\w+)/(t|T)emplates}, 1]
       end
     end
   end
