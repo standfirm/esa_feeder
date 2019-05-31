@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/esa_feeder
     docker:
-      - image: circleci/ruby:2.5.3
+      - image: circleci/ruby:2.6.3
     steps:
       - checkout
       - run:
