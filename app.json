@@ -12,7 +12,8 @@
       "description": "esa.io personal access token. Get from https://your_team.esa.io/user/applications"
     },
     "SLACK_WEBHOOK_URL": {
-      "description": "Slack incoming webhook url. Get from https://your_team.slack.com/apps/manage/custom-integrations. If this variable is empty, then notification is disabled."
+      "description": "Slack incoming webhook url. Get from https://your_team.slack.com/apps/manage/custom-integrations. If this variable is empty, then notification is disabled.",
+      "required": false
     },
     "LANG": {
       "description": "Language Code",
