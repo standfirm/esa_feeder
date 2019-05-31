@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  ruby_test:
+  build:
     working_directory: ~/esa_feeder
     docker:
       - image: circleci/ruby:2.5.3
@@ -12,8 +12,3 @@ jobs:
       - run:
           name: run test
           command: bundle exec rspec spec/
-workflows:
-  version: 2
-  test:
-    jobs:
-      - ruby_test
