@@ -1,6 +1,6 @@
 # EsaFeeder
 
-[![CircleCI](https://circleci.com/gh/standfirm/esa_feeder.svg?style=svg)](https://circleci.com/gh/standfirm/esa_feeder)
+[![CI](https://github.com/standfirm/esa_feeder/actions/workflows/ci.yml/badge.svg)](https://github.com/standfirm/esa_feeder/actions/workflows/ci.yml)
 
 [esa.io](https://esa.io/) のテンプレートから定期的に記事を自動作成するツールです。
 
