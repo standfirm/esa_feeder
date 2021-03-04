@@ -1,0 +1,13 @@
+name: CI
+on: push
+
+jobs:
+  ruby_test:
+    runs-on: ubuntu-latest
+    container: ruby:2.6.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup
+        run: bundle install
+      - name: test
+        run: bundle exec rspec spec/
