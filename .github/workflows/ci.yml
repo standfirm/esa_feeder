@@ -1,13 +1,19 @@
 name: CI
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
 
 jobs:
   ruby_test:
     runs-on: ubuntu-latest
-    container: ruby:2.6.3
     steps:
-      - uses: actions/checkout@v2
-      - name: setup
-        run: bundle install
+      - uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - name: test
         run: bundle exec rspec spec/
