@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> 現在Misoca内でこのツールは使用していないため、アーカイブにします
+
 # EsaFeeder
 
 [![CI](https://github.com/standfirm/esa_feeder/actions/workflows/ci.yml/badge.svg)](https://github.com/standfirm/esa_feeder/actions/workflows/ci.yml)
